@@ -78,9 +78,13 @@ public class UserController
 	@ResponseBody  
 	public Object test(HttpServletRequest req){  
 
-		Returntype text=new Returntype();
-		ReturnUtil.fix(text,"_KEYS_f01");
-		return text;  
+	    Article ar =new Article();
+        Article list = us.selectArticle("1");
+
+        Returntype text=new Returntype();
+        ReturnUtil.fix(text,"_KEYS_s01");
+        text.setData(list);
+        return text;  
 	}  
 
 	/** 
@@ -92,7 +96,6 @@ public class UserController
 	@ResponseBody  
 	public Object selectArticle(HttpServletRequest req,String id){  
 		Article ar =new Article();
-//		ar=us.selectArticle(id);
 		Article list = us.selectArticle(id);
 
 		Returntype text=new Returntype();

@@ -41,12 +41,13 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
             HttpServletResponse response, Object handler) throws Exception {    
         
           
-        String username =  (String)request.getSession().getAttribute("username");   
+  /*      String username =  (String)request.getSession().getAttribute("username");   
         if(username == null){  
             request.getRequestDispatcher("/index.jsp").forward(request, response);  
             return false;  
         }else  
-            return true;     
+            return true;     */
+        return true;  
     }    
     
     /** 
