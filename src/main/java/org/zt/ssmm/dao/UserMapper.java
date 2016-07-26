@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.zt.ssmm.core.Article;
 import org.zt.ssmm.core.Ip;
+import org.zt.ssmm.core.Spatial;
 import org.zt.ssmm.core.Uploadpic;
 import org.zt.ssmm.core.User;
 import org.zt.ssmm.core.Userdata;
@@ -40,6 +41,6 @@ public interface UserMapper {
     int insertUploadPic(Uploadpic info);
     
      int 	insertArticle(Article info);
-     Article selectArticle(String info) ;
+     List<Spatial> selectArticle(String info) ;
      List<Uploadpic> selectUsPic(String info) ;
 }

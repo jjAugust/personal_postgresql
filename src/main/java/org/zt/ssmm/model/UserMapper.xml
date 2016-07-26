@@ -80,8 +80,8 @@
   select * from userdata t where t.userId=#{Userid};
   </select> 
   
-  <select id="selectArticle" resultType="org.zt.ssmm.core.Article" parameterType="java.lang.String" >
-   select t.* from article t where t.id=#{id};
+  <select id="selectArticle" resultType="org.zt.ssmm.core.Spatial" parameterType="java.lang.String" >
+   select t.proj4text from spatial_ref_sys t ;
   </select>
   
   <select id="selectUsPic" resultType="org.zt.ssmm.core.Uploadpic" parameterType="java.lang.String" >

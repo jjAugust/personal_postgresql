@@ -2,7 +2,10 @@ package org.zt.ssmm.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zt.ssmm.core.Article;
 import org.zt.ssmm.core.Returntype;
+import org.zt.ssmm.core.Spatial;
 import org.zt.ssmm.core.User;
 import org.zt.ssmm.core.Userdata;
 import org.zt.ssmm.service.UserService;
@@ -78,31 +82,30 @@ public class UserController
 	@ResponseBody  
 	public Object test(HttpServletRequest req){  
 
-	    Article ar =new Article();
-        Article list = us.selectArticle("1");
-
+	    List<Spatial> list = us.selectArticle("1");
+//	    List<Spatial> list2=new LinkedList<Spatial>();
+        Map<String, String> re=new HashMap<String, String>();
+	    List<HashMap<String, String>> res=new LinkedList<HashMap<String, String>>();
+	    for(Spatial i:list){
+	        re=new HashMap<String, String>();
+	        String j=i.getProj4text();
+	       String[] m= j.split(" ");
+	       for(String l:m){
+	           String[] j2=l.split("=");
+	           if(j2[0].length()==6)
+	               if(j2[0].substring(0, 4).equals("+lon")||j2[0].substring(0, 4).equals("+lat")){
+	                   re.put(j2[0], j2[1]);
+	           }
+	       }
+	       if(re.size()!=0)
+	       res.add((HashMap<String, String>) re);
+	    }
         Returntype text=new Returntype();
         ReturnUtil.fix(text,"_KEYS_s01");
-        text.setData(list);
+        text.setData(res);
         return text;  
 	}  
 
-	/** 
-	 * 测试返回JSON数据 
-	 * @param session 
-	 * @return 
-	 */  
-	@RequestMapping(value="/selectArticle" )  
-	@ResponseBody  
-	public Object selectArticle(HttpServletRequest req,String id){  
-		Article ar =new Article();
-		Article list = us.selectArticle(id);
-
-		Returntype text=new Returntype();
-		ReturnUtil.fix(text,"_KEYS_s01");
-		text.setData(list);
-		return text;  
-	} 
 
 	/** 
 	 * 

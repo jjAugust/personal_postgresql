@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zt.ssmm.core.Article;
 import org.zt.ssmm.core.Ip;
+import org.zt.ssmm.core.Spatial;
 import org.zt.ssmm.core.Uploadpic;
 import org.zt.ssmm.core.User;
 import org.zt.ssmm.core.Userdata;
@@ -118,7 +119,7 @@ public class UserServiceImpl implements UserService
 		return userMapper.insertArticle(info);
 	}
 	@Override
-	public Article selectArticle(String info) 
+	public List<Spatial> selectArticle(String info) 
 	{
 		return userMapper.selectArticle(info);
 	}
